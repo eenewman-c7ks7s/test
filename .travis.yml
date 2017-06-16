@@ -15,6 +15,8 @@ script:
 
 after_success:
 - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-- docker push enewman00/friendlyhello;
+- docker commit 901e3dd5c6f7 friendlyhello;
+- docker tag friendlyhello http://localhost:2222;
+- docker push http://localhost:2222;
 #- docker push ${TRAVIS_REPO_SLUG##*/}:${TRAVIS_BRANCH}-${TRAVIS_COMMIT:0:10};
 
