@@ -4,7 +4,7 @@ services:
 - docker
 
 script:
-- docker build -t ${TRAVIS_REPO_SLUG##*/}:${TRAVIS_BRANCH}-${TRAVIS_COMMIT:0:10} .
+- docker build -t ${TRAVIS_REPO_SLUG##*/}:${TRAVIS_COMMIT:0:10} .
 
 # Simple tests
 - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
@@ -16,7 +16,7 @@ script:
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push enewman00/friendlyhello;
+    docker push ${TRAVIS_REPO_SLUG##*/}:${TRAVIS_COMMIT:0:10};
     fi
 #after_success:
 #- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
