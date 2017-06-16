@@ -8,10 +8,10 @@ script:
 
 # Simple tests
 - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
-     docker run -d -p 80:80 ${TRAVIS_REPO_SLUG##*/}:${TRAVIS_BRANCH}-${TRAVIS_COMMIT:0:10};
-     curl http://127.0.0.1:80;
+     docker run -d -p 2222:80 ${TRAVIS_REPO_SLUG##*/}:${TRAVIS_BRANCH}-${TRAVIS_COMMIT:0:10};
+     curl http://127.0.0.1:2222;
   fi
 
 after_success:
-- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";git 
 
