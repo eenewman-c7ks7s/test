@@ -1,12 +1,17 @@
+dist: trusty
 sudo: required
-
 services:
-  - docker
+- docker
 
-install:
-  - docker build -t carlad/sinatra .
-  - docker run -d -p 127.0.0.1:80:80 carlad/sinatra /bin/sh -c "cd /root/sinatra; bundle exec foreman start;"
-  - docker ps -a
-  - curl http://127.0.0.1:80
-  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+script:
+- docker build -t ${TRAVIS_REPO_SLUG##*/}:${TRAVIS_BRANCH}-${TRAVIS_COMMIT:0:10} .
+
+# Simple tests
+- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
+     docker run -d -p 80:80 ${TRAVIS_REPO_SLUG##*/}:${TRAVIS_BRANCH}-${TRAVIS_COMMIT:0:10}
+     curl http://127.0.0.1:80
+  fi
+
+after_success:
+- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 
