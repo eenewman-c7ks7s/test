@@ -5,14 +5,8 @@ services:
 
 install:
   - docker build -t carlad/sinatra .
-  - docker run -d -p 127.0.0.1:80:4567 carlad/sinatra /bin/sh -c "cd /root/sinatra; bundle exec foreman start;"
+  - docker run -d -p 127.0.0.1:80:80 carlad/sinatra /bin/sh -c "cd /root/sinatra; bundle exec foreman start;"
   - docker ps -a
-  - docker run carlad/sinatra /bin/sh -c "cd /root/sinatra; bundle exec rake test"
+  - curl http://127.0.0.1:80
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 
-
-- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-
-script:
-
-- echo building test;
-- docker build -t test .
