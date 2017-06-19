@@ -2,7 +2,7 @@ version: "3"
 services:
   web:
     # replace username/repo:tag with your name and image details
-    image: username/repository:tag
+    image: enewman00/friendlyhello:${TRAVIS_COMMIT:0:10}
     deploy:
       replicas: 5
       resources:
