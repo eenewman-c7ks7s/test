@@ -18,6 +18,5 @@ after_success:
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push enewman00/friendlyhello:${TRAVIS_COMMIT:0:10};
     fi
-  - echo ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT:0:10};
 #${TRAVIS_REPO_SLUG##*/}
 
