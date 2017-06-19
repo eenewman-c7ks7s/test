@@ -4,7 +4,7 @@ services:
 - docker
 
 script:
-- docker build -t enewman00/friendlyhello:${TRAVIS_COMMIT:0:10}; .
+- docker build -t enewman00/friendlyhello; .
 
 # Simple tests
 - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
