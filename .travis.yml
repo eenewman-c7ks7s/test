@@ -8,7 +8,7 @@ script:
 
 # Simple tests
 - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
-     docker run -d -p 2222:80 ${TRAVIS_REPO_SLUG##*/}:${TRAVIS_COMMIT:0:10};
+    docker run -d -p 2222:80 ${TRAVIS_REPO_SLUG##*/}:${TRAVIS_COMMIT:0:10};
     sleep 10;
     curl --retry 10 --retry-delay 5 -v http://localhost:2222;
   fi
@@ -17,7 +17,6 @@ after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push enewman00/friendlyhello:${TRAVIS_COMMIT:0:10};
-#docker push ${TRAVIS_REPO_SLUG##*/}:${TRAVIS_COMMIT:0:10};
     fi
   - echo ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT:0:10};
 #${TRAVIS_REPO_SLUG##*/}
